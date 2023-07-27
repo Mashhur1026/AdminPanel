@@ -1,0 +1,141 @@
+#addProduct {
+  padding: 40px 80px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background: #e3e6f3;
+}
+
+#addProduct h1 {
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#addProduct .container {
+  display: flex;
+  justify-content: space-between;
+}
+
+#addProduct .addImgContainer {
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  padding: 40px 80px;
+  align-items: center;
+}
+
+#addProduct .addImgContainer input {
+  width: 100%;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #1a1a1a;
+  border: #088178 2px solid;
+  padding: 30px;
+}
+
+#addProduct .addImgContainer h2 {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.single-pro-img {
+  width: 400px;
+  margin-top: 30px;
+}
+
+.small-img-group {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.small-img-col {
+  flex-basis: 24%;
+  cursor: pointer;
+}
+
+.addProductText {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
+.addProductText input,
+.addProductText textarea {
+  width: 100%;
+  padding: 7px 13px;
+  border-radius: 5px;
+  background-color: #fff;
+  border: #088178 1px solid;
+  margin: 10px 0;
+}
+
+.addProductText input:focus,
+.addProductText textarea:focus {
+  outline: 2px solid #088178;
+}
+
+.addProductText h2 {
+  margin: 20px 0;
+  text-align: center;
+}
+
+#addProduct button {
+  max-width: fit-content;
+  margin: auto;
+  margin-top: 30px;
+  background-color: #088178;
+  color: #fff;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 5px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+#addProduct button:hover {
+  background-color: #fff;
+  color: #088178;
+  border: 1px solid #088178;
+}
+
+@media (max-width: 1050px) {
+  #addProduct {
+    padding: 20px 40px;
+  }
+}
+
+@media (max-width: 930px) {
+  #addProduct .container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #addProduct .addImgContainer {
+    width: 100%;
+    padding: 0;
+  }
+
+  .addProductText {
+    width: 100%;
+  }
+
+  #addProduct button {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 430px) {
+  .single-pro-img {
+    width: 300px;
+    margin-top: 30px;
+  }
+
+  #addProduct {
+    padding: 20px;
+  }
+}

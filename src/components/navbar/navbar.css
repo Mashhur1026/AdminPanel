@@ -1,0 +1,133 @@
+#navbar {
+  padding: 20px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #e3e6f3;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+  z-index: 999;
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+#navbar #links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#links li {
+  list-style: none;
+  padding: 0 20px;
+  position: relative;
+}
+
+#links li a {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  transition: 0.3s ease;
+}
+
+#navbar li a:hover,
+#navbar li a.active {
+  color: #088178;
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+}
+
+.search input {
+  padding: 5px;
+  border: 1px solid #088178;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: #fff;
+  width: 200px;
+}
+
+.search button {
+  padding: 5px 10px;
+  border: none;
+  color: #fff;
+  background-color: #088178;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.search input:focus {
+  outline: none;
+}
+
+#close {
+  display: none;
+}
+
+#bar {
+  display: none;
+  align-items: center;
+}
+
+@media (max-width: 1000px) {
+  #navbar {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  #navbar #links {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: fixed;
+    top: 0;
+    right: -1000px;
+    height: 100vh;
+    width: 300px;
+    background-color: #e3e6f3;
+    box-shadow: 0 40px 60px rgba(0, 0, 0, 0.01);
+    padding: 80px 0 0 10px;
+    transition: 0.3s;
+  }
+
+  #navbar #links.active {
+    right: 0;
+  }
+
+  #links li {
+    padding: 15px 0;
+  }
+
+  #close {
+    display: initial;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    color: #222;
+    font-size: 24px;
+  }
+
+  #bar {
+    display: flex;
+    margin-left: 20px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 470px) {
+  #navbar {
+    justify-content: center;
+  }
+
+  .logo img {
+    width: 90px;
+  }
+
+  .search input {
+    width: 130px;
+  }
+}

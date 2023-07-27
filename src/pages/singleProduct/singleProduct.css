@@ -1,0 +1,116 @@
+#prodetails {
+  padding: 40px 80px;
+  display: flex;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.button {
+  display: flex;
+  margin: auto;
+}
+
+.button .delete {
+  color: #fff;
+  background-color: crimson;
+}
+
+.button .delete:hover {
+  color: crimson;
+  background-color: #fff;
+  border: crimson 1px solid;
+}
+
+.button button {
+  max-width: fit-content;
+  margin: 30px 20px;
+  margin-top: 30px;
+  background-color: gold;
+  color: #fff;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 5px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.button button:hover {
+  background-color: #fff;
+  color: gold;
+  border: 1px solid gold;
+}
+
+#prodetails .single-pro-img {
+  width: 40%;
+  margin-right: 50px;
+}
+
+#prodetails .small-img-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+#prodetails .small-img-col {
+  flex-basis: 24%;
+  cursor: pointer;
+}
+
+#prodetails .single-pro-details {
+  width: 50%;
+  padding-top: 30px;
+}
+
+#prodetails .single-pro-details h4 {
+  padding: 20px 0 20px 0;
+  font-size: 26px;
+}
+
+.single-pro-details h6 {
+  margin: 10px 0;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+#prodetails .single-pro-details select {
+  display: block;
+  padding: 5px 10px;
+  margin: 20px 0 10px 0;
+}
+
+#prodetails .single-pro-details select:focus {
+  outline: none;
+}
+
+@media (max-width: 800px) {
+  #prodetails {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 650px) {
+  #prodetails {
+    display: flex;
+    flex-direction: column;
+  }
+  #prodetails .single-pro-img {
+    width: 100%;
+    margin-right: 0;
+  }
+  #prodetails .single-pro-details {
+    width: 100%;
+    padding-top: 50px;
+  }
+  #prodetails .single-pro-details h4 {
+    font-size: 24px;
+  }
+  #prodetails .single-pro-details h2 {
+    font-size: 17px;
+  }
+
+  #prodetails {
+    padding: 20px;
+  }
+}
