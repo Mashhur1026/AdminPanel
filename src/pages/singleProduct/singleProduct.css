@@ -23,6 +23,7 @@
   border: crimson 1px solid;
 }
 
+.button a,
 .button button {
   max-width: fit-content;
   margin: 30px 20px;
@@ -36,7 +37,7 @@
   text-decoration: none;
 }
 
-.button button:hover {
+.button a:hover {
   background-color: #fff;
   color: gold;
   border: 1px solid gold;

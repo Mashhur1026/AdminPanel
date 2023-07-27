@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { array } from "../products/Products";
 import "./singleProduct.css";
 
@@ -70,7 +70,7 @@ function SingleProduct() {
           </div>
           <div className="button">
             <button className="delete">O'chrish</button>
-            <button>O'zgartrish</button>
+            <Link to={`/ProductEdit/${productId}`}>O'zgartrish</Link>
           </div>
         </section>
       )}

@@ -4,6 +4,7 @@ import Products from "./pages/products/Products";
 import AddProduct from "./pages/addProduct/AddProduct";
 import BothBanner from "./pages/banneredit/BothBanner";
 import SingleProduct from "./pages/singleProduct/SingleProduct";
+import ProductEdit from "./pages/productEdit/ProductEdit";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Products />} />
         <Route path="/product/:id" element={<SingleProduct />} />
+        <Route path="/ProductEdit/:id" element={<ProductEdit />} />
       </Routes>
       <AddProduct />
     </>
