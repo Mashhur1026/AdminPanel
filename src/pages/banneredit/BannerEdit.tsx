@@ -9,9 +9,6 @@ function BannerEdit() {
     setSelectedFile(file || null);
   };
 
-  const handleUpload = () => {
-    console.log("Selected file:", selectedFile);
-  };
   return (
     <section id="bannerEdit">
       <h1 className="bannerText">Bannerni O'zgartrish</h1>
@@ -19,7 +16,6 @@ function BannerEdit() {
         <div className="imgContainer">
           <h1>Yangi Suratn tanlang</h1>
           <input type="file" onChange={handleFileChange} />
-          <button onClick={handleUpload}>Rasmn yuklash</button>
           {selectedFile && (
             <div>
               <h2>Tanlangan Surat:</h2>

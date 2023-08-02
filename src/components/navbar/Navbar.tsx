@@ -17,10 +17,10 @@ function Navbar() {
             <a href="/">Banner</a>
           </li>
           <li>
-            <a href="/Products">Tavarlar</a>
+            <a href="/Products">Mahsulotlar</a>
           </li>
           <li>
-            <a href="#addProduct">Tavar Qoshish</a>
+            <a href="#addProduct">Mahsulot Qoshish</a>
           </li>
           <a id="close" onClick={() => setIsOpen(false)}>
             <i className="far fa-times"></i>
