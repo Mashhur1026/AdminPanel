@@ -12,6 +12,10 @@
   margin-bottom: 20px;
 }
 
+#btn {
+  text-align: center;
+}
+
 #addProduct .container {
   display: flex;
   justify-content: space-between;

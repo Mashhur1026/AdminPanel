@@ -1,12 +1,47 @@
 import { ChangeEvent, useState } from "react";
 import "./bannerEdit.css";
 
+interface ProductData {
+  id: number;
+  img: string;
+  textOne: string;
+  textTwo: string;
+  textThree: string;
+}
+
+const banner = {
+  id: 0,
+  img: "",
+  textOne: "",
+  textTwo: "",
+  textThree: "",
+};
+
 function BannerEdit() {
+  const [editedData, setEditedData] = useState<ProductData>(banner);
+
+  const handleChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value } = event.target;
+    if (editedData) {
+      setEditedData((prevData) => ({ ...prevData, [name]: value }));
+    }
+  };
+
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     setSelectedFile(file || null);
+    if (file) {
+      setEditedData((prevData) => ({
+        ...prevData,
+        img: URL.createObjectURL(file),
+      }));
+    }
   };
 
   return (
@@ -25,12 +60,27 @@ function BannerEdit() {
         </div>
         <div className="bannerEditText">
           <h1>Yangi mantlarn krting</h1>
-          <input type="text" placeholder="yangi kchik shior" />
-          <input type="text" placeholder="yangi katta shior" />
-          <input type="text" placeholder="yangi chegirma elonlar" />
+          <input
+            type="text"
+            placeholder="yangi kchik shior"
+            name="textOne"
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            placeholder="yangi katta shior"
+            name="textTwo"
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            placeholder="yangi chegirma elonlar"
+            name="textThree"
+            onChange={handleChange}
+          />
         </div>
       </div>
-      <button>Yuklash</button>
+      <button onClick={() => console.log(editedData)}>Yuklash</button>
     </section>
   );
 }

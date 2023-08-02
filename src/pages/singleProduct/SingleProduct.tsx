@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { array } from "../products/Products";
+import { array } from "../../date";
 import "./singleProduct.css";
 
 interface CartItem {
