@@ -12,7 +12,7 @@ function App() {
       <Navbar />
       <BothBanner />
       <Routes>
-        <Route path="/" element={<Products />} />
+        <Route path="/*" element={<Products />} />
         <Route path="/product/:id" element={<SingleProduct />} />
         <Route path="/ProductEdit/:id" element={<ProductEdit />} />
       </Routes>

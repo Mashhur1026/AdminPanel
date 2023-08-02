@@ -26,9 +26,9 @@ function AddProduct() {
       <h1>Yangi Tavar Qo'shish</h1>
       <div className="container">
         <div className="addImgContainer">
-          <h2>Yangi Suratlarn tanlang</h2>
+          <h2>Suratlarni tanlang</h2>
           <input type="file" multiple onChange={handleFileChange} />
-          <button onClick={handleUpload}>Rasmn yuklash</button>
+          <button onClick={handleUpload}>Rasmlarn yuklash</button>
           {latestSelectedFile && (
             <div className="single-pro-img">
               <img
@@ -57,16 +57,23 @@ function AddProduct() {
           )}
         </div>
         <div className="addProductText">
-          <h2>Yangi mantlarn krting</h2>
+          <h2>Mantlarni krting</h2>
           {[
             "Tavar kampaniyas",
             "Tavar ism",
             "Tavar narx",
             "Razmerlar vergul blan ajrating",
-            "Tavar categoriyas",
           ].map((placeholder, index) => (
             <input key={index} type="text" placeholder={placeholder} />
           ))}
+          <select>
+            <option value="">Categoriyalar</option>
+            <option value="">Oyollar Koylaklar</option>
+            <option value="">Erkaklar Koylaklar</option>
+            <option value="">Krasofka</option>
+            <option value="">Bujiteriya</option>
+            <option value="">Sumka</option>
+          </select>
           <textarea rows={5} placeholder="Tavar haqda malumot" />
         </div>
       </div>

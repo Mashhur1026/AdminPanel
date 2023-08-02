@@ -6,6 +6,13 @@
   background: #e3e6f3;
 }
 
+#bannerEdit .bannerText {
+  font-size: 35px;
+  margin: auto;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
 #bannerEdit .container {
   display: flex;
   justify-content: space-between;
@@ -108,5 +115,20 @@
   }
   .bannerEditText {
     padding: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  #bannerEdit .bannerText {
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+
+  #bannerEdit {
+    padding: 0;
+  }
+
+  #bannerEdit h1 {
+    font-size: 18px;
   }
 }

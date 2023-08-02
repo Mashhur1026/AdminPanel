@@ -1,11 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import "./bannerEdit.css";
 
-interface Prop {
-  setBanner: (value: boolean) => void;
-}
-
-function BannerEdit({ setBanner }: Prop) {
+function BannerEdit() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -18,6 +14,7 @@ function BannerEdit({ setBanner }: Prop) {
   };
   return (
     <section id="bannerEdit">
+      <h1 className="bannerText">Bannerni O'zgartrish</h1>
       <div className="container">
         <div className="imgContainer">
           <h1>Yangi Suratn tanlang</h1>
@@ -37,7 +34,7 @@ function BannerEdit({ setBanner }: Prop) {
           <input type="text" placeholder="yangi chegirma elonlar" />
         </div>
       </div>
-      <button onClick={() => setBanner(true)}>Yuklash</button>
+      <button>Yuklash</button>
     </section>
   );
 }

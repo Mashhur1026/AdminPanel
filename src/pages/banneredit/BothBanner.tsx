@@ -1,16 +1,14 @@
-import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import Banner from "../banner/Banner";
 import BannerEdit from "./BannerEdit";
 
 const BothBanner = () => {
-  const [banner, setBanner] = useState(true);
   return (
     <>
-      {banner ? (
-        <Banner setBanner={setBanner} />
-      ) : (
-        <BannerEdit setBanner={setBanner} />
-      )}
+      <Routes>
+        <Route path="/" element={<Banner />} />
+        <Route path="/BannerEdit" element={<BannerEdit />} />
+      </Routes>
     </>
   );
 };

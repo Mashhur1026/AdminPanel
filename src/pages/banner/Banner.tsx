@@ -1,26 +1,23 @@
 import "./banner.css";
 import img from "../../../img/b17.jpg";
+import { Link } from "react-router-dom";
 
-interface BannerProps {
-  setBanner: (value: boolean) => void;
-}
-
-function Banner({ setBanner }: BannerProps) {
+function Banner() {
   return (
     <section id="banner">
       <div className="container">
         <div className="imgContainer">
-          <h1>Hozirg Banner Surat</h1>
+          <h1>Hozirg Banner Surati</h1>
           <img src={img} alt="banner" />
         </div>
         <div className="bannerText">
-          <h1>Hozirg Banner Matnlar</h1>
+          <h1>Hozirg Banner Matnlari</h1>
           <input type="text" disabled placeholder="kchik shior" />
           <input type="text" disabled placeholder="katta shior" />
           <input type="text" disabled placeholder="chegirma elonlar" />
         </div>
       </div>
-      <a onClick={() => setBanner(false)}>O'zgartrish</a>
+      <Link to={`/BannerEdit`}>O'zgartrish</Link>
     </section>
   );
 }

@@ -14,16 +14,13 @@ function Navbar() {
       <div>
         <ul id="links" className={isOpen ? "active " : ""}>
           <li>
-            <a href="#">Banner</a>
+            <a href="/">Banner</a>
           </li>
           <li>
-            <a href="#">Tavarlar</a>
+            <a href="/Products">Tavarlar</a>
           </li>
           <li>
-            <a href="#">Tavarlar</a>
-          </li>
-          <li>
-            <a href="#">Tavar Qoshish</a>
+            <a href="#addProduct">Tavar Qoshish</a>
           </li>
           <a id="close" onClick={() => setIsOpen(false)}>
             <i className="far fa-times"></i>
