@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { array } from "../../date";
 import "./singleProduct.css";
+import Notiflix from "notiflix";
 
 interface CartItem {
   id: number;
@@ -31,9 +32,18 @@ function SingleProduct() {
     }
   }, [productId]);
 
+  function hendleRemove(id: number): void {
+    const newProducts = array.filter((item) => item.id !== id);
+    const singleReadyTwo = newProducts.filter((item) => item.id === id);
+    if (singleReadyTwo.length === 0) {
+      setSingleProductUse(singleReadyTwo[0]);
+    }
+    Notiflix.Notify.success("Tavar O'chrild");
+  }
+
   return (
     <>
-      {singleProductUse && (
+      {singleProductUse ? (
         <section id="prodetails" key={singleProductUse.id}>
           <div className="single-pro-img">
             <img
@@ -69,10 +79,17 @@ function SingleProduct() {
             <span>{singleProductUse.des}</span>
           </div>
           <div className="button">
-            <button className="delete">O'chrish</button>
+            <button
+              className="delete"
+              onClick={() => hendleRemove(singleProductUse.id)}
+            >
+              O'chrish
+            </button>
             <Link to={`/ProductEdit/${productId}`}>O'zgartrish</Link>
           </div>
         </section>
+      ) : (
+        <div></div>
       )}
     </>
   );

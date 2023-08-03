@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import "./bannerEdit.css";
+import Notiflix from "notiflix";
 
 interface ProductData {
   id: number;
@@ -44,8 +45,15 @@ function BannerEdit() {
     }
   };
 
+  const hedleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(editedData);
+    Notiflix.Notify.success("Banner yuklandi");
+    setSelectedFile(null);
+  };
+
   return (
-    <section id="bannerEdit">
+    <form onSubmit={hedleSubmit} id="bannerEdit">
       <h1 className="bannerText">Bannerni O'zgartrish</h1>
       <div className="container">
         <div className="imgContainer">
@@ -65,23 +73,26 @@ function BannerEdit() {
             placeholder="yangi kchik shior"
             name="textOne"
             onChange={handleChange}
+            required
           />
           <input
             type="text"
             placeholder="yangi katta shior"
             name="textTwo"
             onChange={handleChange}
+            required
           />
           <input
             type="text"
             placeholder="yangi chegirma elonlar"
             name="textThree"
             onChange={handleChange}
+            required
           />
         </div>
       </div>
-      <button onClick={() => console.log(editedData)}>Yuklash</button>
-    </section>
+      <button type="submit">Yuklash</button>
+    </form>
   );
 }
 

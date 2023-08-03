@@ -4,6 +4,7 @@ import { ChangeEvent, useState } from "react";
 import { array } from "../../date";
 import { useParams } from "react-router-dom";
 import "./productEdit.css";
+import Notiflix from "notiflix";
 
 interface ProductData {
   id: number;
@@ -36,11 +37,11 @@ function ProductEdit() {
     } else {
       setEditedData((prevData) => ({ ...prevData, [name]: value }));
     }
-    console.log(editingItem);
   };
 
   const [url, setUrl] = useState(editingItem.map((item) => item.img[0]));
   const [isCheanging, setIsCheanging] = useState(false);
+
   const handleClick = (smallImgUrl: string) => {
     setUrl([smallImgUrl]);
   };
@@ -60,6 +61,18 @@ function ProductEdit() {
       });
       setUrl([URL.createObjectURL(file)]);
     }
+  };
+
+  const hendleClick = () => {
+    setIsCheanging(false);
+    Notiflix.Notify.success("Rasm o'zgartrldi");
+    setSelectedFile(null);
+  };
+
+  const deleteImg = (id: string) => {
+    const removerImgs = editedData.img.filter((item) => item !== id);
+    editedData.img = removerImgs;
+    setUrl(editedData.img);
   };
 
   return (
@@ -82,7 +95,7 @@ function ProductEdit() {
                     />
                     <button
                       className="button"
-                      onClick={() => setIsCheanging(false)}
+                      onClick={hendleClick}
                       disabled={!selectedFile}
                     >
                       Yuklash
@@ -98,7 +111,7 @@ function ProductEdit() {
                     <TbStatusChange onClick={() => setIsCheanging(true)} />
                   </button>
                   <button>
-                    <AiOutlineDelete />
+                    <AiOutlineDelete onClick={() => deleteImg(url[0])} />
                   </button>
                 </div>
               </>
@@ -163,7 +176,13 @@ function ProductEdit() {
           />
         </div>
       </div>
-      <button onClick={() => console.log(editedData)} className="button">
+      <button
+        onClick={() => {
+          console.log(editedData);
+          Notiflix.Notify.success("Mahsulot o'zgartrldi");
+        }}
+        className="button"
+      >
         Yuklash
       </button>
     </section>
