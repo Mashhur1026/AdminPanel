@@ -14,7 +14,10 @@ function Navbar() {
       <div>
         <ul id="links" className={isOpen ? "active " : ""}>
           <li>
-            <a href="/">Banner</a>
+            <a href="/">Asosiy</a>
+          </li>
+          <li>
+            <a href="/Orders">Buyurtmalar</a>
           </li>
           <li>
             <a href="/Products">Mahsulotlar</a>
@@ -29,8 +32,6 @@ function Navbar() {
       </div>
 
       <div className="search">
-        <input type="text" placeholder="kerakli tavar ism" />
-        <button>Qdruv</button>
         <i
           id="bar"
           className="fas fa-outdent"

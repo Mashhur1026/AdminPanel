@@ -1,0 +1,85 @@
+#orders {
+  padding: 0px 80px;
+}
+
+.border {
+  margin: 20px 5px;
+  border: 2px solid #088178;
+}
+
+.btext {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 30px;
+}
+
+.mt tr td {
+  padding: 15px 0;
+  word-break: break-word;
+}
+
+#orders table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  white-space: nowrap;
+}
+
+#orders table img {
+  width: 70%;
+}
+
+#orders table thead {
+  border: 1px solid #e2e9e1;
+  border-left: none;
+  border-right: none;
+}
+
+#orders table thead td {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 15px;
+  padding: 18px 0;
+}
+
+#orders table tbody td {
+  font-size: 15px;
+}
+
+#orders table td {
+  width: 110px;
+  text-align: center;
+}
+
+.mt tr td {
+  box-sizing: border-box;
+}
+
+@media (max-width: 750px) {
+  #orders {
+    padding: 0 20px;
+  }
+
+  .btext {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 570px) {
+  #orders {
+    padding: 0px;
+  }
+
+  #orders table tbody td {
+    font-size: 10px;
+  }
+
+  #orders table thead td {
+    font-size: 10px;
+  }
+
+  #orders table td {
+    width: 60px;
+    text-align: center;
+  }
+}
