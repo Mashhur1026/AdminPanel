@@ -1,10 +1,10 @@
 import { TbStatusChange } from "react-icons/tb";
 import { AiOutlineDelete } from "react-icons/ai";
-import { ChangeEvent, useState } from "react";
-import { array } from "../../date";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./productEdit.css";
 import Notiflix from "notiflix";
+import axios from "../../api/axios";
 
 interface ProductData {
   id: number;
@@ -20,10 +20,29 @@ interface ProductData {
 function ProductEdit() {
   const { id } = useParams();
   const productId = id ? parseInt(id, 10) : null;
+  const [editedData, setEditedData] = useState<ProductData>({
+    id: 0,
+    img: [],
+    category: "",
+    cname: "",
+    name: "",
+    price: 0,
+    sizes: [],
+    des: "",
+  });
 
-  const editingItem = array.filter((item) => item.id === productId);
+  async function getProductData() {
+    try {
+      const response = await axios.get(`/single?singleId=${productId}`);
+      setEditedData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-  const [editedData, setEditedData] = useState<ProductData>(editingItem[0]);
+  useEffect(() => {
+    getProductData();
+  }, []);
 
   const handleChange = (
     event: React.ChangeEvent<
@@ -39,7 +58,7 @@ function ProductEdit() {
     }
   };
 
-  const [url, setUrl] = useState(editingItem.map((item) => item.img[0]));
+  const [url, setUrl] = useState([editedData.img[0]]);
   const [isCheanging, setIsCheanging] = useState(false);
 
   const handleClick = (smallImgUrl: string) => {
@@ -73,6 +92,32 @@ function ProductEdit() {
     const removerImgs = editedData.img.filter((item) => item !== id);
     editedData.img = removerImgs;
     setUrl(editedData.img);
+  };
+
+  const PostProduct = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("name", editedData.name);
+      formData.append("category", editedData.category);
+      formData.append("price", String(editedData.price));
+      formData.append("desc", editedData.des);
+
+      // Make sure size is an array in your code
+      const sizes = editedData.sizes;
+      sizes.forEach((size) => {
+        formData.append("size[]", size);
+      });
+
+      // Make sure size is an array in your code
+      const images = editedData.img;
+      images.forEach((image) => {
+        formData.append("images", image);
+      });
+
+      await axios.put(`/edit?id=${productId}`, formData);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -179,6 +224,7 @@ function ProductEdit() {
       <button
         onClick={() => {
           console.log(editedData);
+          PostProduct();
           Notiflix.Notify.success("Mahsulot o'zgartrldi");
         }}
         className="button"

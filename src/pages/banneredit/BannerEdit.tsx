@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import "./bannerEdit.css";
 import Notiflix from "notiflix";
+import axios from "../../api/axios";
 
 interface ProductData {
   id: number;
@@ -20,6 +21,21 @@ const banner = {
 
 function BannerEdit() {
   const [editedData, setEditedData] = useState<ProductData>(banner);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const PostProduct = async () => {
+    try {
+      const res = await axios.post("/newbanner", {
+        images: editedData.img,
+        text_one: editedData.textOne,
+        text_two: editedData.textTwo,
+        text_three: editedData.textThree,
+      });
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleChange = (
     event: React.ChangeEvent<
@@ -32,8 +48,6 @@ function BannerEdit() {
     }
   };
 
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     setSelectedFile(file || null);
@@ -45,10 +59,21 @@ function BannerEdit() {
     }
   };
 
-  const hedleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const hedleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(editedData);
-    Notiflix.Notify.success("Banner yuklandi");
+    try {
+      const res = await axios.post("/newbanner", {
+        images: editedData.img,
+        text_one: editedData.textOne,
+        text_two: editedData.textTwo,
+        text_three: editedData.textThree,
+      });
+      Notiflix.Notify.success("Banner yuklandi");
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+      Notiflix.Notify.failure("Banner yuklanmadi");
+    }
     setSelectedFile(null);
   };
 

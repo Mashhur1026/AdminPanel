@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import "./addProduct.css";
 import Notiflix from "notiflix";
+import axios from "../../api/axios";
 
 interface ProductData {
   id: number;
@@ -71,9 +72,41 @@ function AddProduct() {
     }
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const PostProduct = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("name", newProduct.name);
+      formData.append("category", newProduct.category);
+      formData.append("price", String(newProduct.price));
+      formData.append("desc", newProduct.des);
+
+      // Make sure size is an array in your code
+      const sizes = newProduct.sizes;
+      sizes.forEach((size) => {
+        formData.append("size[]", size);
+      });
+
+      // Make sure size is an array in your code
+      const images = newProduct.img;
+      images.forEach((image) => {
+        formData.append("images", image);
+      });
+
+      await axios.post("/upload", formData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(newProduct);
+    try {
+      await PostProduct();
+      Notiflix.Notify.success("Mahsulot Yuklandi");
+    } catch (err) {
+      console.log(err);
+      Notiflix.Notify.failure("Xatolik yuz berdi");
+    }
   };
 
   return (
@@ -166,11 +199,7 @@ function AddProduct() {
             required
           />
 
-          <button
-            onClick={() => Notiflix.Notify.success("Mahsulot Yuklandi")}
-            type="submit"
-            disabled={diable}
-          >
+          <button type="submit" disabled={diable}>
             Yuklash
           </button>
         </form>

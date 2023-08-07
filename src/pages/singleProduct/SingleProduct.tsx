@@ -1,59 +1,59 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { array } from "../../date";
 import "./singleProduct.css";
 import Notiflix from "notiflix";
+import axios from "../../api/axios";
 
 interface CartItem {
-  id: number;
-  img: string[];
+  _id: number;
+  images: string[];
   category: string;
-  cname: string;
   name: string;
   price: number;
-  quantity: number;
-  sizes: string[];
-  des: string;
+  size: string[];
+  desc: string;
 }
 
 function SingleProduct() {
   const { id } = useParams();
-  const productId = Number(id);
+  const productId = id;
   const [singleProductUse, setSingleProductUse] = useState<CartItem>();
 
-  const singleProduct = (id: number) => {
-    const singleReady = array.filter((item) => item.id === id);
-    setSingleProductUse(singleReady[0]);
-  };
+  async function getProductData() {
+    try {
+      const response = await axios.get(`/single?singleId=${productId}`);
+      setSingleProductUse(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
-    if (productId) {
-      singleProduct(productId);
-    }
-  }, [productId]);
+    getProductData();
+  }, []);
 
-  function hendleRemove(id: number): void {
-    const newProducts = array.filter((item) => item.id !== id);
-    const singleReadyTwo = newProducts.filter((item) => item.id === id);
-    if (singleReadyTwo.length === 0) {
-      setSingleProductUse(singleReadyTwo[0]);
+  const hendleRemove = async () => {
+    try {
+      await axios.delete(`/delete?deleteId=${productId}`);
+    } catch (err) {
+      console.log(err);
     }
     Notiflix.Notify.success("Tavar O'chrild");
-  }
+  };
 
   return (
     <>
       {singleProductUse ? (
-        <section id="prodetails" key={singleProductUse.id}>
+        <section id="prodetails" key={singleProductUse._id}>
           <div className="single-pro-img">
             <img
-              src={singleProductUse.img[0]}
+              src={singleProductUse.images[0]}
               width="100%"
               id="mainImg"
               alt={singleProductUse.name}
             />
             <div className="small-img-group">
-              {singleProductUse.img.map((img, index) => (
+              {singleProductUse.images.map((img, index) => (
                 <div className="small-img-col" key={index}>
                   <img src={img} width="100%" className="small-img" />
                 </div>
@@ -63,26 +63,23 @@ function SingleProduct() {
 
           <div className="single-pro-details">
             <h6>Categoriya: {singleProductUse.category}</h6>
-            <h6>Kampaniya Nomi: {singleProductUse.cname}</h6>
+            <h6>Kampaniya Nomi: Zara</h6>
             <h4>Nomi: {singleProductUse.name}</h4>
             <h2>Narx: ${singleProductUse.price}</h2>
             <select>
               <option value="">Razmerlar:</option>
-              {singleProductUse.sizes.map((size) => (
-                <option key={size} value={size}>
-                  {size}
+              {singleProductUse.size.map((item) => (
+                <option key={item} value={item}>
+                  {item}
                 </option>
               ))}
             </select>
 
             <h4>Tavar Haqda Malumot</h4>
-            <span>{singleProductUse.des}</span>
+            <span>{singleProductUse.desc}</span>
           </div>
           <div className="button">
-            <button
-              className="delete"
-              onClick={() => hendleRemove(singleProductUse.id)}
-            >
+            <button className="delete" onClick={hendleRemove}>
               O'chrish
             </button>
             <Link to={`/ProductEdit/${productId}`}>O'zgartrish</Link>
