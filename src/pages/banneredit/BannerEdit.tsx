@@ -23,20 +23,6 @@ function BannerEdit() {
   const [editedData, setEditedData] = useState<ProductData>(banner);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const PostProduct = async () => {
-    try {
-      const res = await axios.post("/newbanner", {
-        images: editedData.img,
-        text_one: editedData.textOne,
-        text_two: editedData.textTwo,
-        text_three: editedData.textThree,
-      });
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const handleChange = (
     event: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -59,17 +45,21 @@ function BannerEdit() {
     }
   };
 
-  const hedleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const res = await axios.post("/newbanner", {
-        images: editedData.img,
-        text_one: editedData.textOne,
-        text_two: editedData.textTwo,
-        text_three: editedData.textThree,
-      });
+      const formData = new FormData();
+      if (selectedFile) {
+        formData.append("images", selectedFile);
+      }
+      formData.append("text_one", editedData.textOne);
+      formData.append("text_two", editedData.textTwo);
+      formData.append("text_three", editedData.textThree);
+      await axios.put(
+        "/editbanner?bannerId=64cf9d25e525b67e845acd6e",
+        formData
+      );
       Notiflix.Notify.success("Banner yuklandi");
-      console.log(res);
     } catch (err) {
       console.log(err);
       Notiflix.Notify.failure("Banner yuklanmadi");
@@ -78,7 +68,7 @@ function BannerEdit() {
   };
 
   return (
-    <form onSubmit={hedleSubmit} id="bannerEdit">
+    <form onSubmit={handleSubmit} id="bannerEdit">
       <h1 className="bannerText">Bannerni O'zgartrish</h1>
       <div className="container">
         <div className="imgContainer">

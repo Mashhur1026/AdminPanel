@@ -25,23 +25,40 @@ function Banner() {
   }, []);
 
   return (
-    <section id="banner">
-      <div className="container">
-        <div className="imgContainer">
-          <h1>Hozirg Banner Surati</h1>
-          {banner.images && banner.images.length > 0 && (
-            <img src={banner.images[0]} alt="banner" />
-          )}
-        </div>
-        <div className="bannerText">
-          <h1>Hozirg Banner Matnlari</h1>
-          <input type="text" disabled placeholder={banner.text_one} />
-          <input type="text" disabled placeholder={banner.text_two} />
-          <input type="text" disabled placeholder={banner.text_three} />
-        </div>
-      </div>
-      <Link to={`/BannerEdit`}>O'zgartrish</Link>
-    </section>
+    <>
+      {banner.images && banner.images.length > 0 ? (
+        <section id="banner">
+          <div className="container">
+            <div className="imgContainer">
+              <h1>Hozirg Banner Surati</h1>
+              {banner.images && banner.images.length > 0 && (
+                <img src={banner.images[0]} alt="banner" />
+              )}
+            </div>
+            <div className="bannerText">
+              <h1>Hozirg Banner Matnlari</h1>
+              <input type="text" disabled placeholder={banner.text_one} />
+              <input type="text" disabled placeholder={banner.text_two} />
+              <input type="text" disabled placeholder={banner.text_three} />
+            </div>
+          </div>
+          <Link to={`/BannerEdit`}>O'zgartrish</Link>
+        </section>
+      ) : (
+        <section className="loader">
+          <div className="lds-roller">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </section>
+      )}
+    </>
   );
 }
 

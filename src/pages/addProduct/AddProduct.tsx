@@ -32,25 +32,20 @@ function AddProduct() {
   const [diable, setDisable] = useState(true);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
+    const files = event.target.files?.[0];
     if (files) {
-      setSelectedFiles((prevSelectedFiles) => [
-        ...prevSelectedFiles,
-        ...Array.from(files),
-      ]);
+      setSelectedFiles((prevSelectedFiles) => [...prevSelectedFiles, files]);
     }
   };
 
   const handleUpload = () => {
     const imageUrls = selectedFiles.map((file) => URL.createObjectURL(file));
-
     setnewProduct((prevProduct) => ({
       ...prevProduct,
       img: [...prevProduct.img, ...imageUrls],
     }));
     setDisable(false);
     Notiflix.Notify.success("Rasmlar yuklandi");
-    setSelectedFiles([]);
   };
 
   const latestSelectedFile =
@@ -80,16 +75,13 @@ function AddProduct() {
       formData.append("price", String(newProduct.price));
       formData.append("desc", newProduct.des);
 
-      // Make sure size is an array in your code
       const sizes = newProduct.sizes;
       sizes.forEach((size) => {
         formData.append("size[]", size);
       });
 
-      // Make sure size is an array in your code
-      const images = newProduct.img;
-      images.forEach((image) => {
-        formData.append("images", image);
+      selectedFiles.forEach((file) => {
+        formData.append("images", file);
       });
 
       await axios.post("/upload", formData);
@@ -103,6 +95,8 @@ function AddProduct() {
     try {
       await PostProduct();
       Notiflix.Notify.success("Mahsulot Yuklandi");
+      setSelectedFiles([]);
+      setnewProduct(newProductProps[0]);
     } catch (err) {
       console.log(err);
       Notiflix.Notify.failure("Xatolik yuz berdi");
