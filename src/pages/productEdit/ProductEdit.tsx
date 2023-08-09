@@ -54,7 +54,12 @@ function ProductEdit() {
     const { name, value } = event.target;
     if (name === "sizes") {
       const newSizes = value ? value.split(",") : [];
-      setEditedData((prevData) => ({ ...prevData, [name]: newSizes }));
+      setEditedData((prevData) => ({ ...prevData, size: newSizes }));
+    } else if (name === "price") {
+      setEditedData((prevData) => ({
+        ...prevData,
+        price: parseFloat(value),
+      }));
     } else {
       setEditedData((prevData) => ({ ...prevData, [name]: value }));
     }
@@ -68,13 +73,10 @@ function ProductEdit() {
     const file = event.target.files?.[0];
     if (file) {
       setSelectedFile((prevSelectedFiles) => [...prevSelectedFiles, file]);
-      setEditedData((prevData) => {
-        const filteredImages = prevData.images.filter((img) => img !== url[0]);
-        return {
-          ...prevData,
-          images: [URL.createObjectURL(file), ...filteredImages],
-        };
-      });
+      setEditedData((prevData) => ({
+        ...prevData,
+        images: [URL.createObjectURL(file), ...prevData.images],
+      }));
       setUrl([URL.createObjectURL(file)]);
     }
   };
@@ -107,7 +109,8 @@ function ProductEdit() {
         formData.append("images", file);
       });
 
-      await axios.put(`/edit?id=${productId}`, formData);
+      const res = await axios.put(`/edit?id=${productId}`, formData);
+      console.log(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -191,7 +194,7 @@ function ProductEdit() {
           <input
             type="text"
             name="sizes"
-            value={editedData.size}
+            value={editedData.size.join(",")}
             onChange={handleChange}
           />
 
@@ -200,24 +203,26 @@ function ProductEdit() {
             value={editedData.category}
             onChange={handleChange}
           >
-            <option>{editedData.category}</option>
-            <option>Erkaklar Koylag</option>
-            <option>Nmadur narsa</option>
-            <option>Kerkli narsa</option>
+            <option value={editedData.category}>{editedData.category}</option>
+            <option value="Oyollar Ko'ylaklari">Oyollar Ko'ylaklari</option>
+            <option value="Erkaklar Ko'ylaklari">Erkaklar Ko'ylaklari</option>
+            <option value="Oyoq Kiyimlar">Oyoq Kiyimlar</option>
+            <option value="Bujiteriyalar">Bujiteriyalar</option>
+            <option value="Sumkalar">Sumkalar</option>
           </select>
           <textarea
             rows={5}
-            name="des"
+            name="desc"
             value={editedData.desc}
             onChange={handleChange}
           />
         </div>
       </div>
       <button
-        onClick={() => {
+        onClick={async () => {
           console.log(editedData);
-          PostProduct();
-          Notiflix.Notify.success("Mahsulot o'zgartrldi");
+          await PostProduct();
+          Notiflix.Notify.success("Mahsulot o'zgartirildi");
         }}
         className="button"
       >

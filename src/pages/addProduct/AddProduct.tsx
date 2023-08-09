@@ -179,11 +179,11 @@ function AddProduct() {
 
           <select name="category" onChange={handleChange} required>
             <option value="">Categoriyalar</option>
-            <option value="Oyollar Koylaklar">Oyollar Koylaklar</option>
-            <option value="Erkaklar Koylaklar">Erkaklar Koylaklar</option>
-            <option value="Krasofka">Krasofka</option>
-            <option value="Bujiteriya">Bujiteriya</option>
-            <option value="Sumka">Sumka</option>
+            <option value="Oyollar Ko'ylaklari">Oyollar Ko'ylaklari</option>
+            <option value="Erkaklar Ko'ylaklari">Erkaklar Ko'ylaklari</option>
+            <option value="Oyoq Kiyimlar">Oyoq Kiyimlar</option>
+            <option value="Bujiteriyalar">Bujiteriyalar</option>
+            <option value="Sumkalar">Sumkalar</option>
           </select>
           <textarea
             onChange={handleChange}
