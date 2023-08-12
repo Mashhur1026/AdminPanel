@@ -15,7 +15,6 @@
 
 .mt tr td {
   padding: 15px 0;
-  word-break: break-word;
 }
 
 #orders table {
@@ -46,13 +45,37 @@
   font-size: 15px;
 }
 
+.buyurtma {
+  text-align: center;
+  margin: 50px;
+  color: crimson;
+}
+
 #orders table td {
   width: 110px;
   text-align: center;
 }
 
-.mt tr td {
-  box-sizing: border-box;
+#orders table tbody .talabB {
+  padding: 15px 0;
+  border-top: 1px solid #e2e9e1;
+  border-bottom: 1px solid #e2e9e1;
+}
+
+.btn-c {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.ochrish {
+  color: aliceblue;
+  background-color: crimson;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 3px;
+  width: fit-content;
+  padding: 5px 8px;
+  border: none;
 }
 
 @media (max-width: 750px) {
@@ -81,5 +104,11 @@
   #orders table td {
     width: 60px;
     text-align: center;
+  }
+
+  #orders table .icon {
+    width: 10px;
+    font-size: 12px;
+    padding-left: 2px;
   }
 }

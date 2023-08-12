@@ -104,22 +104,25 @@ function ProductEdit() {
       formData.append("category", editedData.category);
       formData.append("price", String(editedData.price));
       formData.append("desc", editedData.desc);
-      formData.append("company", editedData.category);
+      formData.append("company", editedData.company);
 
       const sizes = editedData.size;
       sizes.forEach((size) => {
         formData.append("size[]", size);
       });
 
-      selectedFile.forEach((file) => {
-        formData.append("images", file);
-      });
+      if (selectedFile.length > 0) {
+        selectedFile.forEach((file) => {
+          formData.append("images", file);
+        });
+      }
 
       postImages.forEach((img) => {
         formData.append("imageUrls[]", img);
       });
 
-      await axios.put(`/edit?id=${productId}`, formData);
+      const res = await axios.put(`/edit?id=${productId}`, formData);
+      console.log(res.data);
     } catch (err) {
       console.log(err);
     }
