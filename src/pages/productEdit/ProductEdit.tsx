@@ -14,6 +14,7 @@ interface ProductData {
   price: number;
   size: string[];
   desc: string;
+  company: string;
 }
 
 function ProductEdit() {
@@ -27,15 +28,18 @@ function ProductEdit() {
     price: 0,
     size: [],
     desc: "",
+    company: "",
   });
   const [url, setUrl] = useState([editedData.images[0]]);
   const [isCheanging, setIsCheanging] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File[]>([]);
+  const [postImages, setPostImages] = useState<string[]>([]);
 
   async function getProductData() {
     try {
       const response = await axios.get(`/single?singleId=${productId}`);
       setUrl([response.data.images[0]]);
+      setPostImages(response.data.images);
       setEditedData(response.data);
     } catch (error) {
       console.log(error);
@@ -89,6 +93,7 @@ function ProductEdit() {
   const deleteImg = (id: string) => {
     const removerImgs = editedData.images.filter((item) => item !== id);
     editedData.images = removerImgs;
+    setPostImages(removerImgs);
     setUrl(editedData.images);
   };
 
@@ -99,6 +104,7 @@ function ProductEdit() {
       formData.append("category", editedData.category);
       formData.append("price", String(editedData.price));
       formData.append("desc", editedData.desc);
+      formData.append("company", editedData.category);
 
       const sizes = editedData.size;
       sizes.forEach((size) => {
@@ -109,8 +115,11 @@ function ProductEdit() {
         formData.append("images", file);
       });
 
-      const res = await axios.put(`/edit?id=${productId}`, formData);
-      console.log(res.data);
+      postImages.forEach((img) => {
+        formData.append("imageUrls[]", img);
+      });
+
+      await axios.put(`/edit?id=${productId}`, formData);
     } catch (err) {
       console.log(err);
     }
@@ -175,8 +184,8 @@ function ProductEdit() {
 
           <input
             type="text"
-            name="cname"
-            value="zara"
+            name="company"
+            value={editedData.company}
             onChange={handleChange}
           />
           <input

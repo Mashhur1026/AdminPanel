@@ -8,6 +8,7 @@ interface Product {
   images: string;
   name: string;
   price: number;
+  company: string;
 }
 
 function Products() {
@@ -36,9 +37,9 @@ function Products() {
               <Link className="underline" to={`/product/${product.id}`}>
                 <img src={product.images} alt="product" />
                 <div className="des">
-                  <span>Zara</span>
+                  <span>{product.company}</span>
                   <h5>{product.name}</h5>
-                  <h4>${product.price}</h4>
+                  <h4>{product.price} UZS</h4>
                 </div>
               </Link>
             </div>

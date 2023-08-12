@@ -74,6 +74,7 @@ function AddProduct() {
       formData.append("category", newProduct.category);
       formData.append("price", String(newProduct.price));
       formData.append("desc", newProduct.des);
+      formData.append("company", newProduct.cname);
 
       const sizes = newProduct.sizes;
       sizes.forEach((size) => {
@@ -84,7 +85,8 @@ function AddProduct() {
         formData.append("images", file);
       });
 
-      await axios.post("/upload", formData);
+      const re = await axios.post("/upload", formData);
+      console.log(re.data);
     } catch (err) {
       console.log(err);
     }

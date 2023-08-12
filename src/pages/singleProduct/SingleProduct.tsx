@@ -12,6 +12,7 @@ interface CartItem {
   price: number;
   size: string[];
   desc: string;
+  company: string;
 }
 
 function SingleProduct() {
@@ -23,6 +24,8 @@ function SingleProduct() {
     try {
       const response = await axios.get(`/single?singleId=${productId}`);
       setSingleProductUse(response.data);
+      console.log(response.data);
+      console.log(productId);
     } catch (error) {
       console.log(error);
     }
@@ -35,6 +38,7 @@ function SingleProduct() {
   const hendleRemove = async () => {
     try {
       await axios.delete(`/delete?deleteId=${productId}`);
+      console.log(productId);
     } catch (err) {
       console.log(err);
     }
@@ -63,9 +67,9 @@ function SingleProduct() {
 
           <div className="single-pro-details">
             <h6>Categoriya: {singleProductUse.category}</h6>
-            <h6>Kampaniya Nomi: Zara</h6>
+            <h6>Kampaniya Nomi:{singleProductUse.company}</h6>
             <h4>Nomi: {singleProductUse.name}</h4>
-            <h2>Narx: ${singleProductUse.price}</h2>
+            <h2>Narx: {singleProductUse.price} UZS</h2>
             <select>
               <option value="">Razmerlar:</option>
               {singleProductUse.size.map((item) => (
