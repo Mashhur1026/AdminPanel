@@ -85,8 +85,7 @@ function AddProduct() {
         formData.append("images", file);
       });
 
-      const re = await axios.post("/upload", formData);
-      console.log(re.data);
+      await axios.post("/upload", formData);
     } catch (err) {
       console.log(err);
     }

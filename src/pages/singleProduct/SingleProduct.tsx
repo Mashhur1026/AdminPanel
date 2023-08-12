@@ -24,8 +24,6 @@ function SingleProduct() {
     try {
       const response = await axios.get(`/single?singleId=${productId}`);
       setSingleProductUse(response.data);
-      console.log(response.data);
-      console.log(productId);
     } catch (error) {
       console.log(error);
     }
@@ -38,7 +36,6 @@ function SingleProduct() {
   const hendleRemove = async () => {
     try {
       await axios.delete(`/delete?deleteId=${productId}`);
-      console.log(productId);
     } catch (err) {
       console.log(err);
     }

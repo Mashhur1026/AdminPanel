@@ -32,7 +32,6 @@ function Orders() {
   async function getProductData() {
     try {
       const response = await axios.get("/getcard");
-      console.log("Fetched data:", response.data);
       setOrders(response.data);
     } catch (error) {
       console.log(error);

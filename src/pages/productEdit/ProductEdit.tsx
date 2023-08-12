@@ -229,8 +229,9 @@ function ProductEdit() {
       </div>
       <button
         onClick={async () => {
-          console.log(editedData);
           await PostProduct();
+          console.log("date", editedData);
+          console.log("img", postImages);
           Notiflix.Notify.success("Mahsulot o'zgartirildi");
         }}
         className="button"
